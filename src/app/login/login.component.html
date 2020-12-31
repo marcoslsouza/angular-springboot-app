@@ -11,6 +11,10 @@
                             <div class="card-body">
                                 <form #loginForm="ngForm" (submit)="onSubmit()">
 
+                                    <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+                                        {{ erro }}
+                                    </div>
+
                                     <div class="alert alert-success" *ngIf="mensagemSucesso">
                                         {{ mensagemSucesso }}
                                     </div>

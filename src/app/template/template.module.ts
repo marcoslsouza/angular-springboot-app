@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
   declarations: [NavbarComponent, SidebarComponent, FooterComponent],
   imports: [
     CommonModule,
-    RouterModule // Para o routerLink ficar disponivel em sidebar
+    RouterModule // Para o routerLink ficar disponivel nos componentes de template
   ],
   exports: [
     NavbarComponent,

@@ -12,9 +12,10 @@ export class LoginComponent implements OnInit {
 
   username : string;
   password : string;
-  loginError : boolean;
   cadastrando : boolean;
   mensagemSucesso : string;
+  errors : String[];
+  loginError : string;
 
   constructor(private router : Router, private auth : AuthService) { }
 
@@ -33,6 +34,8 @@ export class LoginComponent implements OnInit {
 
   cancelaCadastro() {
     this.cadastrando = false;
+    this.errors = null;
+    this.mensagemSucesso = null;
   }
 
   cadastrar() {
@@ -40,11 +43,11 @@ export class LoginComponent implements OnInit {
     usuario.username = this.username;
     usuario.password = this.password;
     this.auth.salvar(usuario).subscribe(response => {
-      this.loginError = false;
+      this.errors = null;
       this.mensagemSucesso = 'Cadastro realizado com sucesso! Efetue o login.';
     },
-    error => {
-      this.loginError = true;
+    responseError => {
+      this.errors = responseError.error.errors;
       this.mensagemSucesso = null;
     })
   }
