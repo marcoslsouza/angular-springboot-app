@@ -26,6 +26,15 @@ export class ClientesService {
   }
 
   getClientes() : Observable<Cliente[]> {
+    /* Obs: para recuperar e enviar o token poderia ser assim, mas temos um interceptor configurado para ficar mais pratico. 
+    token.interceptor.ts
+    const tokenString = localStorage.getItem('access_token');
+    const token = JSON.parse(tokenString);
+    const token = token.access_token;
+    const headers = {
+      'Authorization' : 'Bearer ' + token.access_token
+    }*/
+    // return this.http.get<Cliente[]>(`${this.apiUrl}/sistema-vendas/api/cliente`, {headers});
     return this.http.get<Cliente[]>(`${this.apiUrl}/sistema-vendas/api/cliente`);
   }
 
