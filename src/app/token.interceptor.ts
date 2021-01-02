@@ -15,7 +15,11 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const tokenString = localStorage.getItem('access_token');
 
-    if(tokenString) {
+    const url = request.url;
+
+    // Interceptar apenas quando tiver token e quando a url nao for /oauth/token.
+    // endsWith verifica se a string finaliza com o valor /oauth/token.
+    if(tokenString && !url.endsWith('/oauth/token')) {
       // Volta o token de string para json
       const token = JSON.parse(tokenString);
       const jwt = token.access_token;

@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     this.auth
       .tentarLogar(this.username, this.password)
       .subscribe(response => {
-        console.log(response);
+        // console.log(response);
         // Armazenar o token no local storage do browser, para ser recuperado pelo javascript.
         // Transforma o token em string. Porque o local storage so armazena string.
         const access_token = JSON.stringify(response);

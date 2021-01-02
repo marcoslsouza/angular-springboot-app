@@ -8,6 +8,7 @@ import { Usuario } from './login/Usuario';
 
 // Para importar essa lib precisamos adicionar: npm install --save @auth0/angular-jwt
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -64,5 +65,20 @@ export class AuthService {
 
     // E a mesma coisa que {headers : headers}
     return this.http.post(this.tokenUrl, params.toString(), {headers});
+  }
+
+  // Faz o logout da aplicacao
+  encerraSessao() {
+    localStorage.removeItem('access_token');
+  }
+
+  // Recupera o usuario autenticado.
+  getUsuarioAutenticado() {
+    const token = this.obterToken();
+    if(token) {
+      const usuario = this.jwtHelper.decodeToken(token).user_name;
+      return usuario;
+    }
+    return null;
   }
 }
